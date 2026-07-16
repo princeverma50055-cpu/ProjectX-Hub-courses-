@@ -1,0 +1,411 @@
+[
+  {
+    "slug": "javascript-fundamentals-2026",
+    "title": "JavaScript Fundamentals: Zero to Job-Ready",
+    "description": "A complete beginner-to-intermediate JavaScript course covering variables, functions, DOM manipulation, async programming, and modern ES2024+ syntax — with hands-on text-based lessons.",
+    "shortDescription": "Master core JavaScript from scratch with practical, text-based lessons.",
+    "category": "JavaScript",
+    "tags": ["javascript", "beginner", "web development", "es6"],
+    "level": "Beginner",
+    "thumbnail": "/thumbnails/js-fundamentals.jpg",
+    "instructor": { "name": "Prince Verma", "title": "Founder, ProjectX Hub" },
+    "price": 0,
+    "isFeatured": true,
+    "chapters": [
+      {
+        "chapterId": "ch1",
+        "title": "Getting Started with JavaScript",
+        "order": 1,
+        "lessons": [
+          {
+            "lessonId": "js-01-intro",
+            "title": "What is JavaScript and Why It Matters",
+            "content": "JavaScript is the programming language of the web...\n\nIn this lesson we cover what JS is, where it runs, and why every web developer needs it.",
+            "durationMinutes": 6,
+            "order": 1
+          },
+          {
+            "lessonId": "js-02-variables",
+            "title": "Variables: let, const, and var",
+            "content": "Learn the difference between let, const, and var, and when to use each one...",
+            "durationMinutes": 8,
+            "order": 2
+          }
+        ]
+      },
+      {
+        "chapterId": "ch2",
+        "title": "Functions and Control Flow",
+        "order": 2,
+        "lessons": [
+          {
+            "lessonId": "js-03-functions",
+            "title": "Writing Your First Functions",
+            "content": "Functions are reusable blocks of code...",
+            "durationMinutes": 10,
+            "order": 1
+          },
+          {
+            "lessonId": "js-04-conditionals",
+            "title": "If/Else and Switch Statements",
+            "content": "Control the flow of your program with conditionals...",
+            "durationMinutes": 7,
+            "order": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "advanced-javascript-async-patterns",
+    "title": "Advanced JavaScript: Async Patterns & Performance",
+    "description": "Deep dive into Promises, async/await, event loop internals, debouncing, throttling, and performance optimization techniques for production JS applications.",
+    "shortDescription": "Master async JavaScript and performance patterns used in production apps.",
+    "category": "JavaScript",
+    "tags": ["javascript", "advanced", "async", "performance"],
+    "level": "Advanced",
+    "thumbnail": "/thumbnails/js-advanced.jpg",
+    "instructor": { "name": "Prince Verma", "title": "Founder, ProjectX Hub" },
+    "price": 499,
+    "isFeatured": false,
+    "chapters": [
+      {
+        "chapterId": "ch1",
+        "title": "The Event Loop",
+        "order": 1,
+        "lessons": [
+          {
+            "lessonId": "adv-js-01-eventloop",
+            "title": "Understanding the JavaScript Event Loop",
+            "content": "The event loop is what allows JavaScript to be non-blocking...",
+            "durationMinutes": 12,
+            "order": 1
+          }
+        ]
+      },
+      {
+        "chapterId": "ch2",
+        "title": "Promises and Async/Await",
+        "order": 2,
+        "lessons": [
+          {
+            "lessonId": "adv-js-02-promises",
+            "title": "Promises Explained",
+            "content": "A Promise represents a value that may be available now, later, or never...",
+            "durationMinutes": 11,
+            "order": 1
+          },
+          {
+            "lessonId": "adv-js-03-asyncawait",
+            "title": "async/await in Practice",
+            "content": "async/await is syntactic sugar over Promises that makes async code read like sync code...",
+            "durationMinutes": 9,
+            "order": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "python-for-beginners",
+    "title": "Python for Beginners: Complete Guide",
+    "description": "Learn Python from scratch — syntax, data types, loops, functions, and file handling — through clear, text-based lessons designed for absolute beginners.",
+    "shortDescription": "Start coding in Python with zero prior experience required.",
+    "category": "Python",
+    "tags": ["python", "beginner", "programming basics"],
+    "level": "Beginner",
+    "thumbnail": "/thumbnails/python-beginners.jpg",
+    "instructor": { "name": "Prince Verma", "title": "Founder, ProjectX Hub" },
+    "price": 0,
+    "isFeatured": true,
+    "chapters": [
+      {
+        "chapterId": "ch1",
+        "title": "Python Basics",
+        "order": 1,
+        "lessons": [
+          {
+            "lessonId": "py-01-intro",
+            "title": "Installing Python and Writing Your First Script",
+            "content": "In this lesson, you'll install Python and run your first 'Hello World' program...",
+            "durationMinutes": 5,
+            "order": 1
+          },
+          {
+            "lessonId": "py-02-datatypes",
+            "title": "Data Types: Strings, Numbers, Booleans",
+            "content": "Python has several built-in data types you'll use constantly...",
+            "durationMinutes": 8,
+            "order": 2
+          }
+        ]
+      },
+      {
+        "chapterId": "ch2",
+        "title": "Control Flow and Loops",
+        "order": 2,
+        "lessons": [
+          {
+            "lessonId": "py-03-loops",
+            "title": "For and While Loops",
+            "content": "Loops let you repeat code without writing it multiple times...",
+            "durationMinutes": 9,
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "python-data-structures-algorithms",
+    "title": "Python Data Structures & Algorithms",
+    "description": "A practical course on lists, dictionaries, sets, stacks, queues, sorting, and searching algorithms — implemented step-by-step in Python.",
+    "shortDescription": "Learn DSA fundamentals through clear Python implementations.",
+    "category": "Python",
+    "tags": ["python", "dsa", "interview prep", "intermediate"],
+    "level": "Intermediate",
+    "thumbnail": "/thumbnails/python-dsa.jpg",
+    "instructor": { "name": "Prince Verma", "title": "Founder, ProjectX Hub" },
+    "price": 799,
+    "isFeatured": true,
+    "chapters": [
+      {
+        "chapterId": "ch1",
+        "title": "Core Data Structures",
+        "order": 1,
+        "lessons": [
+          {
+            "lessonId": "py-dsa-01-lists",
+            "title": "Lists and List Comprehensions",
+            "content": "Lists are Python's most versatile data structure...",
+            "durationMinutes": 10,
+            "order": 1
+          },
+          {
+            "lessonId": "py-dsa-02-dicts",
+            "title": "Dictionaries and Hash Maps",
+            "content": "Dictionaries provide O(1) average lookup time...",
+            "durationMinutes": 9,
+            "order": 2
+          }
+        ]
+      },
+      {
+        "chapterId": "ch2",
+        "title": "Sorting and Searching",
+        "order": 2,
+        "lessons": [
+          {
+            "lessonId": "py-dsa-03-sorting",
+            "title": "Bubble Sort, Merge Sort, Quick Sort",
+            "content": "We compare three sorting algorithms and their time complexity...",
+            "durationMinutes": 14,
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "python-automation-scripting",
+    "title": "Python Automation & Scripting for Business",
+    "description": "Automate repetitive tasks with Python — file handling, web scraping basics, email automation, and scheduling scripts to save hours of manual work.",
+    "shortDescription": "Use Python to automate boring, repetitive business tasks.",
+    "category": "Python",
+    "tags": ["python", "automation", "business", "scripting"],
+    "level": "Intermediate",
+    "thumbnail": "/thumbnails/python-automation.jpg",
+    "instructor": { "name": "Prince Verma", "title": "Founder, ProjectX Hub" },
+    "price": 599,
+    "isFeatured": false,
+    "chapters": [
+      {
+        "chapterId": "ch1",
+        "title": "File and Folder Automation",
+        "order": 1,
+        "lessons": [
+          {
+            "lessonId": "py-auto-01-files",
+            "title": "Reading and Writing Files with Python",
+            "content": "Automate file organization, renaming, and batch processing...",
+            "durationMinutes": 8,
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "introduction-to-artificial-intelligence",
+    "title": "Introduction to Artificial Intelligence",
+    "description": "Understand the core concepts behind AI — machine learning, neural networks, and generative AI — explained in plain language with no math background required.",
+    "shortDescription": "A beginner-friendly introduction to how AI actually works.",
+    "category": "AI",
+    "tags": ["ai", "machine learning", "beginner"],
+    "level": "Beginner",
+    "thumbnail": "/thumbnails/ai-intro.jpg",
+    "instructor": { "name": "Prince Verma", "title": "Founder, ProjectX Hub" },
+    "price": 0,
+    "isFeatured": true,
+    "chapters": [
+      {
+        "chapterId": "ch1",
+        "title": "What is AI?",
+        "order": 1,
+        "lessons": [
+          {
+            "lessonId": "ai-01-whatisai",
+            "title": "AI vs Machine Learning vs Deep Learning",
+            "content": "These three terms are often used interchangeably but mean different things...",
+            "durationMinutes": 7,
+            "order": 1
+          },
+          {
+            "lessonId": "ai-02-history",
+            "title": "A Brief History of AI",
+            "content": "From the Turing Test to ChatGPT — how AI evolved over 70 years...",
+            "durationMinutes": 6,
+            "order": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "prompt-engineering-mastery",
+    "title": "Prompt Engineering Mastery",
+    "description": "Learn how to write effective prompts for large language models like Claude and GPT — covering few-shot prompting, chain-of-thought, and system prompt design.",
+    "shortDescription": "Get better, more reliable outputs from any AI model.",
+    "category": "AI",
+    "tags": ["ai", "prompt engineering", "llm", "chatgpt", "claude"],
+    "level": "Beginner",
+    "thumbnail": "/thumbnails/prompt-engineering.jpg",
+    "instructor": { "name": "Prince Verma", "title": "Founder, ProjectX Hub" },
+    "price": 349,
+    "isFeatured": true,
+    "chapters": [
+      {
+        "chapterId": "ch1",
+        "title": "Prompting Basics",
+        "order": 1,
+        "lessons": [
+          {
+            "lessonId": "pe-01-basics",
+            "title": "Anatomy of a Good Prompt",
+            "content": "A good prompt has context, a clear task, and constraints...",
+            "durationMinutes": 8,
+            "order": 1
+          }
+        ]
+      },
+      {
+        "chapterId": "ch2",
+        "title": "Advanced Techniques",
+        "order": 2,
+        "lessons": [
+          {
+            "lessonId": "pe-02-cot",
+            "title": "Chain-of-Thought Prompting",
+            "content": "Asking a model to 'think step by step' can dramatically improve accuracy...",
+            "durationMinutes": 9,
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "machine-learning-with-python",
+    "title": "Machine Learning with Python",
+    "description": "A hands-on introduction to supervised and unsupervised learning using Python — covering regression, classification, and clustering with real-world examples.",
+    "shortDescription": "Build your first machine learning models with Python.",
+    "category": "AI",
+    "tags": ["ai", "machine learning", "python", "intermediate"],
+    "level": "Intermediate",
+    "thumbnail": "/thumbnails/ml-python.jpg",
+    "instructor": { "name": "Prince Verma", "title": "Founder, ProjectX Hub" },
+    "price": 899,
+    "isFeatured": false,
+    "chapters": [
+      {
+        "chapterId": "ch1",
+        "title": "Supervised Learning",
+        "order": 1,
+        "lessons": [
+          {
+            "lessonId": "ml-01-regression",
+            "title": "Linear Regression from Scratch",
+            "content": "Linear regression predicts a continuous value based on input features...",
+            "durationMinutes": 13,
+            "order": 1
+          },
+          {
+            "lessonId": "ml-02-classification",
+            "title": "Classification with Logistic Regression",
+            "content": "Classification predicts a category instead of a number...",
+            "durationMinutes": 11,
+            "order": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "ai-automation-tools-for-business",
+    "title": "AI Automation Tools for Small Businesses",
+    "description": "A practical, non-technical course on using AI tools (n8n, Zapier, ChatGPT, Claude) to automate marketing, customer support, and operations for small businesses.",
+    "shortDescription": "Use no-code AI tools to automate your business operations.",
+    "category": "AI",
+    "tags": ["ai", "automation", "business", "no-code"],
+    "level": "Beginner",
+    "thumbnail": "/thumbnails/ai-automation-business.jpg",
+    "instructor": { "name": "Prince Verma", "title": "Founder, ProjectX Hub" },
+    "price": 449,
+    "isFeatured": true,
+    "chapters": [
+      {
+        "chapterId": "ch1",
+        "title": "AI Automation Foundations",
+        "order": 1,
+        "lessons": [
+          {
+            "lessonId": "aiauto-01-overview",
+            "title": "Which Tasks Should You Automate First?",
+            "content": "Not everything should be automated — here's how to prioritize...",
+            "durationMinutes": 7,
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "generative-ai-for-content-creators",
+    "title": "Generative AI for Content Creators",
+    "description": "Learn to use AI image, video, and text generation tools to produce content faster — covering ethical use, brand voice, and monetization strategies.",
+    "shortDescription": "Speed up your content creation workflow using generative AI.",
+    "category": "AI",
+    "tags": ["ai", "content creation", "generative ai", "creator economy"],
+    "level": "Beginner",
+    "thumbnail": "/thumbnails/genai-creators.jpg",
+    "instructor": { "name": "Prince Verma", "title": "Founder, ProjectX Hub" },
+    "price": 299,
+    "isFeatured": false,
+    "chapters": [
+      {
+        "chapterId": "ch1",
+        "title": "AI Content Tools Overview",
+        "order": 1,
+        "lessons": [
+          {
+            "lessonId": "genai-01-overview",
+            "title": "The Generative AI Content Stack",
+            "content": "From scripting to thumbnails to voiceovers — where AI fits in your pipeline...",
+            "durationMinutes": 8,
+            "order": 1
+          }
+        ]
+      }
+    ]
+  }
+]
