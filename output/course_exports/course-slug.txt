@@ -1,0 +1,178 @@
+import json
+import re
+from pathlib import Path
+
+INPUT_FILE = "courses-seed-data-100.json"
+OUTPUT_DIR = Path("output/course_exports")
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+def slugify(text):
+    text = str(text).lower().strip()
+    text = re.sub(r"[^a-z0-9]+", "-", text)
+    return text.strip("-") or "course"
+
+def load_courses(path):
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    if isinstance(data, list):
+        return data
+    if isinstance(data, dict):
+        for key in ["courses", "items", "data", "results"]:
+            if key in data and isinstance(data[key], list):
+                return data[key]
+    return []
+
+def get_field(obj, key, default=""):
+    val = obj.get(key, default)
+    return default if val is None else val
+
+def count_lessons_and_minutes(course):
+    chapters = course.get("chapters", []) or []
+    lesson_count = 0
+    total_minutes = 0
+    for ch in chapters:
+        lessons = ch.get("lessons", []) or []
+        lesson_count += len(lessons)
+        for lesson in lessons:
+            try:
+                total_minutes += int(lesson.get("durationMinutes", 0) or 0)
+            except:
+                pass
+    return lesson_count, total_minutes
+
+def normalize_text(text):
+    text = str(text or "").strip()
+    text = re.sub(r"s+", " ", text)
+    return text
+
+def expand_ai_section(course):
+    title = get_field(course, "title", "")
+    short_desc = get_field(course, "shortDescription", "")
+    desc = get_field(course, "description", "")
+    extra = []
+    extra.append("AI Course Deep Explanation")
+    extra.append("=" * 30)
+    extra.append(f"Course: {title}")
+    if short_desc:
+        extra.append(f"Short Description: {short_desc}")
+    if desc:
+        extra.append(f"Description: {desc}")
+    extra.append("")
+    extra.append("What this AI course should cover:")
+    extra.append("- Core AI concept and purpose")
+    extra.append("- How the technology works in simple language")
+    extra.append("- Real-world applications")
+    extra.append("- Strengths and limitations")
+    extra.append("- Ethics, safety, and responsible usage")
+    extra.append("- Tools, workflow, and practical examples")
+    extra.append("- A mini project or practice assignment")
+    extra.append("")
+    extra.append("Suggested learning flow:")
+    extra.append("1. Start with the basic definition.")
+    extra.append("2. Explain the internal working step by step.")
+    extra.append("3. Show examples from apps, websites, or automation.")
+    extra.append("4. Add common mistakes and misconceptions.")
+    extra.append("5. End with one practical assignment.")
+    return "
+".join(extra)
+
+def build_course_text(course):
+    title = get_field(course, "title", "Untitled Course")
+    slug = get_field(course, "slug", slugify(title))
+    category = get_field(course, "category", "")
+    level = get_field(course, "level", "")
+    price = get_field(course, "price", 0)
+    short_desc = normalize_text(get_field(course, "shortDescription", ""))
+    desc = normalize_text(get_field(course, "description", ""))
+    chapters = course.get("chapters", []) or []
+    lesson_count, total_minutes = count_lessons_and_minutes(course)
+
+    lines = []
+    lines.append(f"Course Title: {title}")
+    lines.append(f"Slug: {slug}")
+    lines.append(f"Category: {category}")
+    lines.append(f"Level: {level}")
+    lines.append(f"Price: {price}")
+    lines.append(f"Total Chapters: {len(chapters)}")
+    lines.append(f"Total Lessons: {lesson_count}")
+    lines.append(f"Estimated Total Minutes: {total_minutes}")
+    if short_desc:
+        lines.append(f"Short Description: {short_desc}")
+    if desc:
+        lines.append(f"Description: {desc}")
+
+    lines.append("")
+    lines.append("Complete Chapter-wise Course Content")
+    lines.append("=" * 40)
+
+    for ch_index, ch in enumerate(chapters, start=1):
+        ch_title = get_field(ch, "title", f"Chapter {ch_index}")
+        ch_order = get_field(ch, "order", ch_index)
+        lessons = ch.get("lessons", []) or []
+
+        lines.append("")
+        lines.append(f"Chapter {ch_order}: {ch_title}")
+        lines.append("-" * (10 + len(str(ch_title))))
+
+        for ls_index, lesson in enumerate(lessons, start=1):
+            l_title = get_field(lesson, "title", f"Lesson {ls_index}")
+            l_order = get_field(lesson, "order", ls_index)
+            duration = get_field(lesson, "durationMinutes", 0)
+            content = normalize_text(get_field(lesson, "content", ""))
+
+            lines.append("")
+            lines.append(f"Lesson {l_order}: {l_title}")
+            lines.append(f"Duration: {duration} minutes")
+            lines.append("Explanation:")
+            if content:
+                lines.append(content)
+            else:
+                lines.append("No lesson content provided in source data.")
+
+    if str(category).lower() == "ai":
+        lines.append("")
+        lines.append(expand_ai_section(course))
+
+    lines.append("")
+    lines.append("Final Student Notes")
+    lines.append("=" * 20)
+    lines.append("This course is structured to be read lesson by lesson in order.")
+    lines.append("Each chapter builds on the previous one.")
+    lines.append("Use the explanation text as learning notes and revise after each lesson.")
+
+    return "
+".join(lines)
+
+def export_course(course):
+    title = get_field(course, "title", "Untitled Course")
+    slug = get_field(course, "slug", slugify(title))
+
+    with open(OUTPUT_DIR / f"{slug}.json", "w", encoding="utf-8") as f:
+        json.dump(course, f, ensure_ascii=False, indent=2)
+
+    with open(OUTPUT_DIR / f"{slug}.txt", "w", encoding="utf-8") as f:
+        f.write(build_course_text(course))
+
+def main():
+    courses = load_courses(INPUT_FILE)
+    manifest = []
+
+    for course in courses:
+        slug = get_field(course, "slug", slugify(get_field(course, "title", "course")))
+        export_course(course)
+        manifest.append({
+            "slug": slug,
+            "title": get_field(course, "title", ""),
+            "category": get_field(course, "category", ""),
+            "level": get_field(course, "level", ""),
+            "price": get_field(course, "price", 0),
+            "featured": get_field(course, "isFeatured", False)
+        })
+
+    with open(OUTPUT_DIR / "manifest.json", "w", encoding="utf-8") as f:
+        json.dump(manifest, f, ensure_ascii=False, indent=2)
+
+    print(f"Exported {len(courses)} courses to {OUTPUT_DIR}")
+
+if __name__ == "__main__":
+    main()
