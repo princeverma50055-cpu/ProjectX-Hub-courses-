@@ -1,0 +1,120 @@
+import json
+import os
+import re
+from pathlib import Path
+
+INPUT_FILE = "courses-seed-data-100.json"
+OUTPUT_DIR = Path("output/course_exports")
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+def slugify(text):
+    text = text.lower().strip()
+    text = re.sub(r"[^a-z0-9]+", "-", text)
+    return text.strip("-") or "course"
+
+def get_courses(data):
+    if isinstance(data, list):
+        return data
+    if isinstance(data, dict):
+        for key in ["courses", "items", "data", "results"]:
+            if key in data and isinstance(data[key], list):
+                return data[key]
+    return []
+
+def total_lessons_and_minutes(course):
+    chapters = course.get("chapters", []) or []
+    lessons_count = 0
+    minutes = 0
+    for ch in chapters:
+        lessons = ch.get("lessons", []) or []
+        lessons_count += len(lessons)
+        for lesson in lessons:
+            try:
+                minutes += int(lesson.get("durationMinutes", 0) or 0)
+            except:
+                pass
+    return lessons_count, minutes
+
+def build_summary(course):
+    title = course.get("title", "Untitled Course")
+    slug = course.get("slug") or slugify(title)
+    category = course.get("category", "")
+    level = course.get("level", "")
+    price = course.get("price", 0)
+    short_desc = course.get("shortDescription", "")
+    desc = course.get("description", "")
+    chapters = course.get("chapters", []) or []
+    lessons_count, minutes = total_lessons_and_minutes(course)
+
+    lines = []
+    lines.append(f"Title: {title}")
+    lines.append(f"Slug: {slug}")
+    lines.append(f"Category: {category}")
+    lines.append(f"Level: {level}")
+    lines.append(f"Price: {price}")
+    lines.append(f"Chapters: {len(chapters)}")
+    lines.append(f"Lessons: {lessons_count}")
+    lines.append(f"Estimated Duration Minutes: {minutes}")
+    if short_desc:
+        lines.append(f"Short Description: {short_desc}")
+    if desc:
+        lines.append(f"Description: {desc}")
+
+    lines.append("")
+    lines.append("Chapter Outline:")
+    for ch in chapters:
+        ch_title = ch.get("title", "Chapter")
+        ch_order = ch.get("order", "")
+        lessons = ch.get("lessons", []) or []
+        lines.append(f"- {ch_order}. {ch_title} ({len(lessons)} lessons)")
+        for lesson in lessons:
+            l_title = lesson.get("title", "Lesson")
+            l_minutes = lesson.get("durationMinutes", 0)
+            l_order = lesson.get("order", "")
+            content = lesson.get("content", "")
+            lines.append(f"  - {l_order}. {l_title} [{l_minutes} min]")
+            if content:
+                clean = " ".join(str(content).split())
+                lines.append(f"    {clean}")
+
+    if str(category).lower() == "ai":
+        lines.append("")
+        lines.append("AI Expanded Notes:")
+        lines.append("This course should also cover AI basics, how the concept works, real-world use cases, limitations, ethical concerns, and practical examples.")
+        lines.append("Suggested additions: prompt examples, tools, workflow ideas, mini project, and common mistakes to avoid.")
+        lines.append("If you want a full AI version, you can also append sections like: neural networks, LLMs, embeddings, training data, inference, and evaluation.")
+
+    return "
+".join(lines)
+
+def main():
+    with open(INPUT_FILE, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    courses = get_courses(data)
+
+    manifest = []
+    for course in courses:
+        slug = course.get("slug") or slugify(course.get("title", "course"))
+        manifest.append({
+            "slug": slug,
+            "title": course.get("title", ""),
+            "category": course.get("category", ""),
+            "level": course.get("level", ""),
+            "price": course.get("price", 0),
+            "featured": course.get("isFeatured", False)
+        })
+
+        with open(OUTPUT_DIR / f"{slug}.json", "w", encoding="utf-8") as f:
+            json.dump(course, f, ensure_ascii=False, indent=2)
+
+        with open(OUTPUT_DIR / f"{slug}-summary.txt", "w", encoding="utf-8") as f:
+            f.write(build_summary(course))
+
+    with open(OUTPUT_DIR / "manifest.json", "w", encoding="utf-8") as f:
+        json.dump(manifest, f, ensure_ascii=False, indent=2)
+
+    print(f"Done: {len(courses)} courses exported to {OUTPUT_DIR}")
+
+if __name__ == "__main__":
+    main()
